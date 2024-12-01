@@ -178,19 +178,27 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 		sqlConn->Open();
 
 		sqlCmd->Connection = sqlConn;
-		sqlCmd->CommandText = "SELECT PasswordHash FROM users WHERE email = @Email";
+		sqlCmd->CommandText = "SELECT PasswordHash, Role FROM users WHERE email = @Email";
 		sqlCmd->Parameters->AddWithValue("@Email", email);
 
 		// Execute query
 		sqlRd = sqlCmd->ExecuteReader();
 		if (sqlRd->Read()) {
 			String^ storedHash = sqlRd->GetString(0); // Fetch hashed password
+			String^ userRole = sqlRd->GetString(1);   // Fetch user role
+
 			sqlRd->Close();
 
 			if (storedHash == password) { // In production, compare hashes securely
 				MessageBox::Show("Login Successful!");
 
 				mdiForm^ mdi = gcnew mdiForm();
+				// Set the user role in MDI form before showing
+				mdi->SetUserRole(userRole);
+
+				// Update status strip to show logged-in user and role
+				//mdi->toolStripStatusLabel1->Text = "User: " + email + " (" + userRole + ")";
+
 				mdi->Show();
 				this->Hide();
 			}

@@ -125,7 +125,7 @@
   <ItemGroup>
     <ClCompile Include="Login_Form.cpp" />
     <ClCompile Include="mdiForm.cpp" />
-    <ClCompile Include="registerForm.cpp" />
+    <ClCompile Include="addUser.cpp" />
     <ClCompile Include="DBConnection.cpp" />
     <ClCompile Include="UserAuth.cpp" />
   </ItemGroup>
@@ -138,7 +138,7 @@
     <ClInclude Include="Login_Form.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="registerForm.h">
+    <ClInclude Include="addUser.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -149,8 +149,8 @@
     <EmbeddedResource Include="mdiForm.resx">
       <DependentUpon>mdiForm.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="registerForm.resx">
-      <DependentUpon>registerForm.h</DependentUpon>
+    <EmbeddedResource Include="addUser.resx">
+      <DependentUpon>addUser.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

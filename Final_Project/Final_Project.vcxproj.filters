@@ -21,7 +21,7 @@
     <ClCompile Include="Login_Form.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="registerForm.cpp">
+    <ClCompile Include="addUser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="DBConnection.cpp">
@@ -38,7 +38,7 @@
     <ClInclude Include="Login_Form.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="registerForm.h">
+    <ClInclude Include="addUser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DBConnection.h">

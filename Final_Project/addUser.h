@@ -46,20 +46,24 @@ namespace FinalProject {
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::Label^ label3;
-	private: System::Windows::Forms::Label^ label4;
-	private: System::Windows::Forms::Label^ label5;
+
+
 	private: System::Windows::Forms::Label^ label6;
 	private: System::Windows::Forms::TextBox^ textBox2;
 	private: System::Windows::Forms::TextBox^ textBox3;
 
-	private: System::Windows::Forms::TextBox^ textBox5;
-	private: System::Windows::Forms::TextBox^ textBox6;
+
+
 	private: System::Windows::Forms::DateTimePicker^ dateTimePicker1;
 	private: System::Windows::Forms::Button^ Register;
 	private: System::Windows::Forms::Button^ Cancel;
-	private: System::Windows::Forms::LinkLabel^ linkLabel1;
+
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	private: System::Windows::Forms::Button^ upload_btn;
+	private: System::Windows::Forms::TextBox^ textBox4;
+	private: System::Windows::Forms::TextBox^ textBox5;
+	private: System::Windows::Forms::Label^ label4;
+	private: System::Windows::Forms::Label^ label5;
 
 
 
@@ -82,19 +86,18 @@ namespace FinalProject {
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
-			this->label4 = (gcnew System::Windows::Forms::Label());
-			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->label6 = (gcnew System::Windows::Forms::Label());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
-			this->textBox6 = (gcnew System::Windows::Forms::TextBox());
 			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
 			this->Register = (gcnew System::Windows::Forms::Button());
 			this->Cancel = (gcnew System::Windows::Forms::Button());
-			this->linkLabel1 = (gcnew System::Windows::Forms::LinkLabel());
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->upload_btn = (gcnew System::Windows::Forms::Button());
+			this->textBox4 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox5 = (gcnew System::Windows::Forms::TextBox());
+			this->label4 = (gcnew System::Windows::Forms::Label());
+			this->label5 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -126,34 +129,16 @@ namespace FinalProject {
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(38, 147);
+			this->label3->Location = System::Drawing::Point(30, 147);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(48, 20);
 			this->label3->TabIndex = 3;
 			this->label3->Text = L"Email";
 			// 
-			// label4
-			// 
-			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(30, 263);
-			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(78, 20);
-			this->label4->TabIndex = 4;
-			this->label4->Text = L"Password";
-			// 
-			// label5
-			// 
-			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(25, 321);
-			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(137, 20);
-			this->label5->TabIndex = 5;
-			this->label5->Text = L"Confirm Password";
-			// 
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(25, 208);
+			this->label6->Location = System::Drawing::Point(30, 208);
 			this->label6->Name = L"label6";
 			this->label6->Size = System::Drawing::Size(99, 20);
 			this->label6->TabIndex = 6;
@@ -173,20 +158,6 @@ namespace FinalProject {
 			this->textBox3->Size = System::Drawing::Size(284, 26);
 			this->textBox3->TabIndex = 8;
 			// 
-			// textBox5
-			// 
-			this->textBox5->Location = System::Drawing::Point(196, 263);
-			this->textBox5->Name = L"textBox5";
-			this->textBox5->Size = System::Drawing::Size(284, 26);
-			this->textBox5->TabIndex = 10;
-			// 
-			// textBox6
-			// 
-			this->textBox6->Location = System::Drawing::Point(196, 321);
-			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(284, 26);
-			this->textBox6->TabIndex = 11;
-			// 
 			// dateTimePicker1
 			// 
 			this->dateTimePicker1->Location = System::Drawing::Point(196, 208);
@@ -196,33 +167,22 @@ namespace FinalProject {
 			// 
 			// Register
 			// 
-			this->Register->Location = System::Drawing::Point(196, 389);
+			this->Register->Location = System::Drawing::Point(196, 417);
 			this->Register->Name = L"Register";
 			this->Register->Size = System::Drawing::Size(107, 36);
 			this->Register->TabIndex = 13;
-			this->Register->Text = L"Register";
+			this->Register->Text = L"Add\r\n";
 			this->Register->UseVisualStyleBackColor = true;
 			this->Register->Click += gcnew System::EventHandler(this, &registerForm::Register_Click);
 			// 
 			// Cancel
 			// 
-			this->Cancel->Location = System::Drawing::Point(395, 389);
+			this->Cancel->Location = System::Drawing::Point(410, 417);
 			this->Cancel->Name = L"Cancel";
 			this->Cancel->Size = System::Drawing::Size(111, 36);
 			this->Cancel->TabIndex = 14;
 			this->Cancel->Text = L"Cancel";
 			this->Cancel->UseVisualStyleBackColor = true;
-			// 
-			// linkLabel1
-			// 
-			this->linkLabel1->AutoSize = true;
-			this->linkLabel1->Location = System::Drawing::Point(235, 454);
-			this->linkLabel1->Name = L"linkLabel1";
-			this->linkLabel1->Size = System::Drawing::Size(217, 20);
-			this->linkLabel1->TabIndex = 15;
-			this->linkLabel1->TabStop = true;
-			this->linkLabel1->Text = L"Have an account\? Login here";
-			this->linkLabel1->LinkClicked += gcnew System::Windows::Forms::LinkLabelLinkClickedEventHandler(this, &registerForm::linkLabel1_LinkClicked);
 			// 
 			// pictureBox1
 			// 
@@ -243,24 +203,56 @@ namespace FinalProject {
 			this->upload_btn->Text = L"Upload";
 			this->upload_btn->UseVisualStyleBackColor = true;
 			// 
+			// textBox4
+			// 
+			this->textBox4->Location = System::Drawing::Point(196, 265);
+			this->textBox4->Name = L"textBox4";
+			this->textBox4->Size = System::Drawing::Size(284, 26);
+			this->textBox4->TabIndex = 18;
+			// 
+			// textBox5
+			// 
+			this->textBox5->Location = System::Drawing::Point(196, 322);
+			this->textBox5->Name = L"textBox5";
+			this->textBox5->Size = System::Drawing::Size(284, 26);
+			this->textBox5->TabIndex = 19;
+			// 
+			// label4
+			// 
+			this->label4->AutoSize = true;
+			this->label4->Location = System::Drawing::Point(30, 265);
+			this->label4->Name = L"label4";
+			this->label4->Size = System::Drawing::Size(78, 20);
+			this->label4->TabIndex = 20;
+			this->label4->Text = L"Password\r\n";
+			this->label4->Click += gcnew System::EventHandler(this, &registerForm::label4_Click_1);
+			// 
+			// label5
+			// 
+			this->label5->AutoSize = true;
+			this->label5->Location = System::Drawing::Point(30, 328);
+			this->label5->Name = L"label5";
+			this->label5->Size = System::Drawing::Size(137, 20);
+			this->label5->TabIndex = 21;
+			this->label5->Text = L"Confirm Password\r\n";
+			// 
 			// registerForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(799, 531);
+			this->ClientSize = System::Drawing::Size(799, 465);
+			this->Controls->Add(this->label5);
+			this->Controls->Add(this->label4);
+			this->Controls->Add(this->textBox5);
+			this->Controls->Add(this->textBox4);
 			this->Controls->Add(this->upload_btn);
 			this->Controls->Add(this->pictureBox1);
-			this->Controls->Add(this->linkLabel1);
 			this->Controls->Add(this->Cancel);
 			this->Controls->Add(this->Register);
 			this->Controls->Add(this->dateTimePicker1);
-			this->Controls->Add(this->textBox6);
-			this->Controls->Add(this->textBox5);
 			this->Controls->Add(this->textBox3);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->label6);
-			this->Controls->Add(this->label5);
-			this->Controls->Add(this->label4);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
@@ -268,7 +260,7 @@ namespace FinalProject {
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"registerForm";
-			this->Text = L"registerForm";
+			this->Text = L"addUserForm";
 			this->Load += gcnew System::EventHandler(this, &registerForm::registerForm_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
@@ -286,8 +278,8 @@ private: System::Void Register_Click(System::Object^ sender, System::EventArgs^ 
 	String^ firstName = textBox1->Text;
 	String^ lastName = textBox2->Text;
 	String^ email = textBox3->Text;
-	String^ password = textBox5->Text;
-	String^ confirmPassword = textBox6->Text;
+	String^ password = textBox4->Text;
+	String^ confirmPassword = textBox5->Text;
 
 	if (password != confirmPassword) {
 		MessageBox::Show("Passwords do not match.", "Registration Error");
@@ -327,6 +319,8 @@ private: System::Void linkLabel1_LinkClicked(System::Object^ sender, System::Win
 	loginForm->Show();*/
 }
 private: System::Void registerForm_Load(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void label4_Click_1(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }
