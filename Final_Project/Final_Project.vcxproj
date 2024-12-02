@@ -123,13 +123,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="addUser.cpp" />
+    <ClCompile Include="addUsr.cpp" />
     <ClCompile Include="Login_Form.cpp" />
     <ClCompile Include="mdiForm.cpp" />
-    <ClCompile Include="addUser.cpp" />
     <ClCompile Include="DBConnection.cpp" />
     <ClCompile Include="UserAuth.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="addUser.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="addUsr.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="DBConnection.h" />
     <ClInclude Include="mdiForm.h">
       <FileType>CppForm</FileType>
@@ -138,19 +145,19 @@
     <ClInclude Include="Login_Form.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="addUser.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="addUser.resx">
+      <DependentUpon>addUser.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addUsr.resx">
+      <DependentUpon>addUsr.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login_Form.resx">
       <DependentUpon>Login_Form.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="mdiForm.resx">
       <DependentUpon>mdiForm.h</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="addUser.resx">
-      <DependentUpon>addUser.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

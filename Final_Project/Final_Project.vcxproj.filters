@@ -21,9 +21,6 @@
     <ClCompile Include="Login_Form.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="addUser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DBConnection.cpp">
       <Filter>Database</Filter>
     </ClCompile>
@@ -33,12 +30,15 @@
     <ClCompile Include="mdiForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="addUser.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="addUsr.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Login_Form.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="addUser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="DBConnection.h">
@@ -48,6 +48,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="mdiForm.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="addUser.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="addUsr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

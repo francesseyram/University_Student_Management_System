@@ -1,5 +1,6 @@
-#include "addUser.h"
 #pragma once
+#include "addUsr.h"
+
 using namespace System::Windows::Forms;
 
 
@@ -11,6 +12,7 @@ namespace FinalProject {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+
 
 	/// <summary>
 	/// Summary for mdiForm
@@ -99,7 +101,7 @@ namespace FinalProject {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+		System::ComponentModel::Container^ components;
 
 #pragma region Windows Form Designer generated code
 
@@ -127,8 +129,17 @@ namespace FinalProject {
 			this->profileToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->administratorToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->manageStudentsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->addStudentToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->removeStudentToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->editStudentToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->manageFacultyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->addFacultyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->removeFacultyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->editStudentToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->manageCoursesToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->addCourseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->removeCourseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->editCourseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->generateReportsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->manageFinancialsToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->toolStrip1 = (gcnew System::Windows::Forms::ToolStrip());
@@ -140,15 +151,6 @@ namespace FinalProject {
 			this->statusStrip1 = (gcnew System::Windows::Forms::StatusStrip());
 			this->toolStripStatusLabel1 = (gcnew System::Windows::Forms::ToolStripStatusLabel());
 			this->toolStripStatusLabel2 = (gcnew System::Windows::Forms::ToolStripStatusLabel());
-			this->addStudentToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->removeStudentToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->addFacultyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->removeFacultyToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->editStudentToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->editStudentToolStripMenuItem1 = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->addCourseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->removeCourseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
-			this->editCourseToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->menuStrip2->SuspendLayout();
 			this->toolStrip1->SuspendLayout();
 			this->statusStrip1->SuspendLayout();
@@ -203,25 +205,25 @@ namespace FinalProject {
 			// enrollInCourseToolStripMenuItem
 			// 
 			this->enrollInCourseToolStripMenuItem->Name = L"enrollInCourseToolStripMenuItem";
-			this->enrollInCourseToolStripMenuItem->Size = System::Drawing::Size(270, 34);
+			this->enrollInCourseToolStripMenuItem->Size = System::Drawing::Size(237, 34);
 			this->enrollInCourseToolStripMenuItem->Text = L"Enroll in Course";
 			// 
 			// viewGradesToolStripMenuItem
 			// 
 			this->viewGradesToolStripMenuItem->Name = L"viewGradesToolStripMenuItem";
-			this->viewGradesToolStripMenuItem->Size = System::Drawing::Size(270, 34);
+			this->viewGradesToolStripMenuItem->Size = System::Drawing::Size(237, 34);
 			this->viewGradesToolStripMenuItem->Text = L"View Grades";
 			// 
 			// viewScheduleToolStripMenuItem
 			// 
 			this->viewScheduleToolStripMenuItem->Name = L"viewScheduleToolStripMenuItem";
-			this->viewScheduleToolStripMenuItem->Size = System::Drawing::Size(270, 34);
+			this->viewScheduleToolStripMenuItem->Size = System::Drawing::Size(237, 34);
 			this->viewScheduleToolStripMenuItem->Text = L"View Schedule";
 			// 
 			// profileToolStripMenuItem
 			// 
 			this->profileToolStripMenuItem->Name = L"profileToolStripMenuItem";
-			this->profileToolStripMenuItem->Size = System::Drawing::Size(270, 34);
+			this->profileToolStripMenuItem->Size = System::Drawing::Size(237, 34);
 			this->profileToolStripMenuItem->Text = L"Profile";
 			// 
 			// facultyToolStripMenuItem
@@ -278,6 +280,25 @@ namespace FinalProject {
 			this->manageStudentsToolStripMenuItem->Size = System::Drawing::Size(270, 34);
 			this->manageStudentsToolStripMenuItem->Text = L"Manage Students";
 			// 
+			// addStudentToolStripMenuItem
+			// 
+			this->addStudentToolStripMenuItem->Name = L"addStudentToolStripMenuItem";
+			this->addStudentToolStripMenuItem->Size = System::Drawing::Size(270, 34);
+			this->addStudentToolStripMenuItem->Text = L"Add Student";
+			this->addStudentToolStripMenuItem->Click += gcnew System::EventHandler(this, &mdiForm::addStudentToolStripMenuItem_Click);
+			// 
+			// removeStudentToolStripMenuItem
+			// 
+			this->removeStudentToolStripMenuItem->Name = L"removeStudentToolStripMenuItem";
+			this->removeStudentToolStripMenuItem->Size = System::Drawing::Size(270, 34);
+			this->removeStudentToolStripMenuItem->Text = L"Remove Student";
+			// 
+			// editStudentToolStripMenuItem
+			// 
+			this->editStudentToolStripMenuItem->Name = L"editStudentToolStripMenuItem";
+			this->editStudentToolStripMenuItem->Size = System::Drawing::Size(270, 34);
+			this->editStudentToolStripMenuItem->Text = L"Edit Student";
+			// 
 			// manageFacultyToolStripMenuItem
 			// 
 			this->manageFacultyToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
@@ -288,6 +309,25 @@ namespace FinalProject {
 			this->manageFacultyToolStripMenuItem->Size = System::Drawing::Size(270, 34);
 			this->manageFacultyToolStripMenuItem->Text = L"Manage Faculty";
 			// 
+			// addFacultyToolStripMenuItem
+			// 
+			this->addFacultyToolStripMenuItem->Name = L"addFacultyToolStripMenuItem";
+			this->addFacultyToolStripMenuItem->Size = System::Drawing::Size(270, 34);
+			this->addFacultyToolStripMenuItem->Text = L"Add Faculty";
+			this->addFacultyToolStripMenuItem->Click += gcnew System::EventHandler(this, &mdiForm::addFacultyToolStripMenuItem_Click);
+			// 
+			// removeFacultyToolStripMenuItem
+			// 
+			this->removeFacultyToolStripMenuItem->Name = L"removeFacultyToolStripMenuItem";
+			this->removeFacultyToolStripMenuItem->Size = System::Drawing::Size(270, 34);
+			this->removeFacultyToolStripMenuItem->Text = L"Remove Faculty";
+			// 
+			// editStudentToolStripMenuItem1
+			// 
+			this->editStudentToolStripMenuItem1->Name = L"editStudentToolStripMenuItem1";
+			this->editStudentToolStripMenuItem1->Size = System::Drawing::Size(270, 34);
+			this->editStudentToolStripMenuItem1->Text = L"Edit Student";
+			// 
 			// manageCoursesToolStripMenuItem1
 			// 
 			this->manageCoursesToolStripMenuItem1->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
@@ -297,6 +337,24 @@ namespace FinalProject {
 			this->manageCoursesToolStripMenuItem1->Name = L"manageCoursesToolStripMenuItem1";
 			this->manageCoursesToolStripMenuItem1->Size = System::Drawing::Size(270, 34);
 			this->manageCoursesToolStripMenuItem1->Text = L"Manage Courses";
+			// 
+			// addCourseToolStripMenuItem
+			// 
+			this->addCourseToolStripMenuItem->Name = L"addCourseToolStripMenuItem";
+			this->addCourseToolStripMenuItem->Size = System::Drawing::Size(238, 34);
+			this->addCourseToolStripMenuItem->Text = L"Add Course";
+			// 
+			// removeCourseToolStripMenuItem
+			// 
+			this->removeCourseToolStripMenuItem->Name = L"removeCourseToolStripMenuItem";
+			this->removeCourseToolStripMenuItem->Size = System::Drawing::Size(238, 34);
+			this->removeCourseToolStripMenuItem->Text = L"Remove Course";
+			// 
+			// editCourseToolStripMenuItem
+			// 
+			this->editCourseToolStripMenuItem->Name = L"editCourseToolStripMenuItem";
+			this->editCourseToolStripMenuItem->Size = System::Drawing::Size(238, 34);
+			this->editCourseToolStripMenuItem->Text = L"Edit Course";
 			// 
 			// generateReportsToolStripMenuItem
 			// 
@@ -396,61 +454,6 @@ namespace FinalProject {
 			this->toolStripStatusLabel2->Size = System::Drawing::Size(53, 25);
 			this->toolStripStatusLabel2->Text = L"Date:";
 			// 
-			// addStudentToolStripMenuItem
-			// 
-			this->addStudentToolStripMenuItem->Name = L"addStudentToolStripMenuItem";
-			this->addStudentToolStripMenuItem->Size = System::Drawing::Size(270, 34);
-			this->addStudentToolStripMenuItem->Text = L"Add Student";
-			this->addStudentToolStripMenuItem->Click += gcnew System::EventHandler(this, &mdiForm::addStudentToolStripMenuItem_Click);
-			// 
-			// removeStudentToolStripMenuItem
-			// 
-			this->removeStudentToolStripMenuItem->Name = L"removeStudentToolStripMenuItem";
-			this->removeStudentToolStripMenuItem->Size = System::Drawing::Size(270, 34);
-			this->removeStudentToolStripMenuItem->Text = L"Remove Student";
-			// 
-			// addFacultyToolStripMenuItem
-			// 
-			this->addFacultyToolStripMenuItem->Name = L"addFacultyToolStripMenuItem";
-			this->addFacultyToolStripMenuItem->Size = System::Drawing::Size(270, 34);
-			this->addFacultyToolStripMenuItem->Text = L"Add Faculty";
-			// 
-			// removeFacultyToolStripMenuItem
-			// 
-			this->removeFacultyToolStripMenuItem->Name = L"removeFacultyToolStripMenuItem";
-			this->removeFacultyToolStripMenuItem->Size = System::Drawing::Size(270, 34);
-			this->removeFacultyToolStripMenuItem->Text = L"Remove Faculty";
-			// 
-			// editStudentToolStripMenuItem
-			// 
-			this->editStudentToolStripMenuItem->Name = L"editStudentToolStripMenuItem";
-			this->editStudentToolStripMenuItem->Size = System::Drawing::Size(270, 34);
-			this->editStudentToolStripMenuItem->Text = L"Edit Student";
-			// 
-			// editStudentToolStripMenuItem1
-			// 
-			this->editStudentToolStripMenuItem1->Name = L"editStudentToolStripMenuItem1";
-			this->editStudentToolStripMenuItem1->Size = System::Drawing::Size(270, 34);
-			this->editStudentToolStripMenuItem1->Text = L"Edit Student";
-			// 
-			// addCourseToolStripMenuItem
-			// 
-			this->addCourseToolStripMenuItem->Name = L"addCourseToolStripMenuItem";
-			this->addCourseToolStripMenuItem->Size = System::Drawing::Size(270, 34);
-			this->addCourseToolStripMenuItem->Text = L"Add Course";
-			// 
-			// removeCourseToolStripMenuItem
-			// 
-			this->removeCourseToolStripMenuItem->Name = L"removeCourseToolStripMenuItem";
-			this->removeCourseToolStripMenuItem->Size = System::Drawing::Size(270, 34);
-			this->removeCourseToolStripMenuItem->Text = L"Remove Course";
-			// 
-			// editCourseToolStripMenuItem
-			// 
-			this->editCourseToolStripMenuItem->Name = L"editCourseToolStripMenuItem";
-			this->editCourseToolStripMenuItem->Size = System::Drawing::Size(270, 34);
-			this->editCourseToolStripMenuItem->Text = L"Edit Course";
-			// 
 			// mdiForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
@@ -518,71 +521,34 @@ namespace FinalProject {
 		}
 
 #pragma endregion
-private: System::Void toolStripButton1_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void mdiForm_Load(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void toolStripButton6_Click(System::Object^ sender, System::EventArgs^ e) {
-	
-}
-private: System::Void toolStripButton4_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-private: System::Void toolStripButton2_Click(System::Object^ sender, System::EventArgs^ e) {
-}
-
-private: System::Void addStudentToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) {
-	addUser ^ addStudentForm = gcnew addUser();
-	addStudentForm->MdiParent = this;  // Set the MDI parent to the current form
-	addStudentForm->Show();
-
-	// Assuming the user will enter their details and submit via a button or dialog
-	if (addStudentForm->DialogResult == Windows::Forms::DialogResult::OK) {
-		String^ firstName = addStudentForm->firstNameTextBox->Text;
-		String^ lastName = addStudentForm->lastNameTextBox->Text;
-		String^ email = addStudentForm->emailTextBox->Text;
-		DateTime^ dob = addStudentForm->dobPicker->Value;
-		Image^ picture = addStudentForm->pictureBox->Image;
-		String^ password = addStudentForm->passwordTextBox->Text;
-		String^ confirmPassword = addStudentForm->confirmPasswordTextBox->Text;
-
-		// Validate passwords
-		if (password != confirmPassword) {
-			MessageBox::Show("Passwords do not match. Please try again.", "Validation Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
-			return; // Stop further processing if passwords don't match
-		}
-
-		// Hardcode the role as "Student"
-		String^ role = "Student";
-
-		// Insert the student into the database
-		InsertStudentIntoDatabase(firstName, lastName, email, dob, picture, password, role);
+	private: System::Void toolStripButton1_Click(System::Object^ sender, System::EventArgs^ e) {
 	}
-}
+	private: System::Void mdiForm_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void toolStripButton6_Click(System::Object^ sender, System::EventArgs^ e) {
 
-	   // Method to insert the student data into the database
-	   void InsertStudentIntoDatabase(String^ firstName, String^ lastName, String^ email, DateTime^ dob, Image^ picture, String^ password, String^ role) {
-		   // Implement the logic to insert the student into your database.
-		   // This is just a placeholder for the actual database logic.
+	}
+	private: System::Void toolStripButton4_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
+	private: System::Void toolStripButton2_Click(System::Object^ sender, System::EventArgs^ e) {
+	}
 
-		   // For example:
-		   // String^ connectionString = "your_connection_string_here";
-		   // SqlConnection^ connection = gcnew SqlConnection(connectionString);
-		   // SqlCommand^ command = gcnew SqlCommand("INSERT INTO Students (FirstName, LastName, Email, DateOfBirth, Picture, Password, Role) VALUES (@FirstName, @LastName, @Email, @DOB, @Picture, @Password, @Role)", connection);
+	private: System::Void addStudentToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) 
+	{
+		// Create an instance of the addUser form
+		addUsr^ addUserForm = gcnew addUsr("Student");
 
-		   // Add parameters to the SQL command
-		   // command->Parameters->AddWithValue("@FirstName", firstName);
-		   // command->Parameters->AddWithValue("@LastName", lastName);
-		   // command->Parameters->AddWithValue("@Email", email);
-		   // command->Parameters->AddWithValue("@DOB", dob);
-		   // command->Parameters->AddWithValue("@Picture", picture);
-		   // command->Parameters->AddWithValue("@Password", password);
-		   // command->Parameters->AddWithValue("@Role", role);
+		// Display the form as a modal dialog
+		addUserForm->ShowDialog();
+	}
+	private: System::Void addFacultyToolStripMenuItem_Click(System::Object^ sender, System::EventArgs^ e) 
+	{
+	
+		// Create an instance of the addUser form
+		addUsr^ addUserForm1 = gcnew addUsr("Faculty");
 
-		   // Execute the command
-		   // connection->Open();
-		   // command->ExecuteNonQuery();
-		   // connection->Close();
-
-		   MessageBox::Show("Student added successfully!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
-	   }
+		// Display the form as a modal dialog
+		addUserForm1->ShowDialog();
+	}
 };
+	};
