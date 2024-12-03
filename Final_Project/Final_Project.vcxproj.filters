@@ -30,10 +30,16 @@
     <ClCompile Include="mdiForm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="addUser.cpp">
+    <ClCompile Include="addUsr.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="addUsr.cpp">
+    <ClCompile Include="Add_Course.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EnrollCourse.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="facultyCourse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,10 +56,16 @@
     <ClInclude Include="mdiForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="addUser.h">
+    <ClInclude Include="addUsr.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="addUsr.h">
+    <ClInclude Include="Add_Course.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnrollCourse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="facultyCourse.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

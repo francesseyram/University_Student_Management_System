@@ -7,7 +7,8 @@ namespace FinalProject {
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
-	using namespace System::Drawing;using namespace MySql::Data::MySqlClient;
+	using namespace System::Drawing;
+	using namespace MySql::Data::MySqlClient;
 	using namespace System::IO;
 
 
@@ -80,6 +81,92 @@ namespace FinalProject {
 		/// Required designer variable.
 		/// </summary>
 		System::ComponentModel::Container ^components;
+	public: bool isEditMode = false; // Add this property to the form
+	public: int editingIndexNumber = -1; // To store the ID of the student being edited
+
+	public:
+		void LoadStudentData(int indexNumber) {
+			try {
+				sqlConn->ConnectionString = "datasource=localhost;port=3306;username=root;password=;database=usrmdb";
+				sqlConn->Open();
+
+				sqlCmd->Connection = sqlConn;
+				sqlCmd->CommandText = "SELECT * FROM Students INNER JOIN Users ON Students.UserID = Users.UserID " +
+					"WHERE Students.IndexNumber = @IndexNumber";
+				sqlCmd->Parameters->AddWithValue("@IndexNumber", indexNumber);
+
+				MySqlDataReader^ reader = sqlCmd->ExecuteReader();
+				if (reader->Read()) {
+					// Populate the form fields with student data
+					textBox1->Text = reader["FirstName"]->ToString();
+					textBox2->Text = reader["LastName"]->ToString();
+					textBox3->Text = reader["Email"]->ToString();
+					textBox5->Text = reader["PasswordHash"]->ToString(); // Replace with actual password logic
+					dateTimePicker1->Value = DateTime::Parse(reader["DateOfBirth"]->ToString());
+					comboBox1->Text = reader["Major"]->ToString();
+					comboBox4->Text = reader["Status"]->ToString();
+
+					// Load image into pictureBox
+					if (!Convert::IsDBNull(reader["ProfilePicture"])) {
+						array<Byte>^ pictureData = (array<Byte>^)reader["ProfilePicture"];
+						MemoryStream^ ms = gcnew MemoryStream(pictureData);
+						pictureBox1->Image = Image::FromStream(ms);
+					}
+				}
+				reader->Close();
+			}
+			catch (Exception^ ex) {
+				MessageBox::Show("Error loading student data: " + ex->Message,
+					"Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			}
+			finally {
+				if (sqlConn->State == ConnectionState::Open) {
+					sqlConn->Close();
+				}
+			}
+		}
+
+		void LoadFacultyData(String^ email) {
+			try {
+				sqlConn->ConnectionString = "datasource=localhost;port=3306;username=root;password=;database=usrmdb";
+				sqlConn->Open();
+
+				sqlCmd->Connection = sqlConn;
+				sqlCmd->CommandText = "SELECT * FROM Faculty INNER JOIN Users ON Faculty.UserID = Users.UserID " +
+					"WHERE Users.Email = @Email";
+				sqlCmd->Parameters->AddWithValue("@Email", email);
+
+				MySqlDataReader^ reader = sqlCmd->ExecuteReader();
+				if (reader->Read()) {
+					// Populate the form fields with faculty data
+					textBox1->Text = reader["FirstName"]->ToString();
+					textBox2->Text = reader["LastName"]->ToString();
+					textBox3->Text = reader["Email"]->ToString();
+					textBox5->Text = reader["PasswordHash"]->ToString(); // Replace with actual password logic
+					dateTimePicker2->Value = DateTime::Parse(reader["DateOfAppointment"]->ToString());
+					comboBox2->Text = reader["Status"]->ToString();
+					textBox4->Text = reader["Department"]->ToString();
+
+					// Load image into pictureBox
+					if (!Convert::IsDBNull(reader["ProfilePicture"])) {
+						array<Byte>^ pictureData = (array<Byte>^)reader["ProfilePicture"];
+						MemoryStream^ ms = gcnew MemoryStream(pictureData);
+						pictureBox1->Image = Image::FromStream(ms);
+					}
+				}
+				reader->Close();
+			}
+			catch (Exception^ ex) {
+				MessageBox::Show("Error loading faculty data: " + ex->Message,
+					"Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+			}
+			finally {
+				if (sqlConn->State == ConnectionState::Open) {
+					sqlConn->Close();
+				}
+			}
+		}
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -249,6 +336,7 @@ namespace FinalProject {
 			this->button3->TabIndex = 15;
 			this->button3->Text = L"Cancel";
 			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &addUsr::button3_Click);
 			// 
 			// dateTimePicker1
 			// 
@@ -465,96 +553,177 @@ namespace FinalProject {
 		String^ adminStatus = comboBox3->Text;
 		array<Byte>^ pictureData = nullptr; // Placeholder for the picture data
 
+
+		// Check if passwords match
 		if (password != confirmPassword) {
 			MessageBox::Show("Passwords do not match.", "Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
 			return;
 		}
 
-		// Generate a unique 6-digit IndexNumber
-		Random^ rand = gcnew Random();
-		int indexNumber = 0;
-		bool unique = false;
-
 		try {
+			// Ensure sqlConn is properly initialized and the connection string is valid
 			sqlConn->ConnectionString = "datasource=localhost;port=3306;username=root;password=;database=usrmdb";
-			sqlConn->Open();
 
-			// Ensure uniqueness of IndexNumber
-			while (!unique) {
-				indexNumber = rand->Next(100000, 999999); // Generate a random 6-digit number
-				sqlCmd->Connection = sqlConn;
-				sqlCmd->CommandText = "SELECT COUNT(*) FROM Students WHERE IndexNumber = @IndexNumber";
+			// Check if the connection is already open, if not, open it
+			if (sqlConn->State != ConnectionState::Open) {
+				sqlConn->Open();
+				//MessageBox::Show("Database connection opened successfully.", "Info", MessageBoxButtons::OK, MessageBoxIcon::Information);
+			}
+
+			// Explicitly associate the command with the connection
+			sqlCmd->Connection = sqlConn;  // Make sure the command uses the open connection
+
+			if (isEditMode) {
+				if (userRole == "Student") {
+					// Existing student update logic
+				// Update existing student record
+				sqlCmd->CommandText = "UPDATE Users INNER JOIN Students ON Users.UserID = Students.UserID " +
+					"SET Users.FirstName = @FirstName, Users.LastName = @LastName, Users.Email = @Email, " +
+					"Users.PasswordHash = @PasswordHash, Users.DateOfBirth = @DateOfBirth, " +
+					"Students.Major = @Major, Students.Status = @Status, Users.ProfilePicture = @ProfilePicture " +
+					"WHERE Students.IndexNumber = @IndexNumber";
 				sqlCmd->Parameters->Clear();
-				sqlCmd->Parameters->AddWithValue("@IndexNumber", indexNumber);
-
-				int count = Convert::ToInt32(sqlCmd->ExecuteScalar());
-				if (count == 0) {
-					unique = true;
-				}
-			}
-
-			// Convert the image to a byte array
-			if (pictureBox1->Image != nullptr) {
-				MemoryStream^ ms = gcnew MemoryStream();
-				pictureBox1->Image->Save(ms, pictureBox1->Image->RawFormat);
-				pictureData = ms->ToArray();
-			}
-
-
-
-			// Insert general user data
-			sqlCmd->CommandText = "INSERT INTO Users (FirstName, LastName, Email, PasswordHash, DateOfBirth, Role, ProfilePicture) " +
-				"VALUES (@FirstName, @LastName, @Email, @PasswordHash, @DateOfBirth, @Role, @ProfilePicture)";
-			sqlCmd->Parameters->Clear();
-			sqlCmd->Parameters->AddWithValue("@FirstName", firstName);
-			sqlCmd->Parameters->AddWithValue("@LastName", lastName);
-			sqlCmd->Parameters->AddWithValue("@Email", email);
-			sqlCmd->Parameters->AddWithValue("@PasswordHash", password); // Hash the password
-			sqlCmd->Parameters->AddWithValue("@DateOfBirth", dob);
-			sqlCmd->Parameters->AddWithValue("@Role", userRole);
-			// Add the picture data or DBNull::Value to the parameter
-			if (pictureData != nullptr) {
-				sqlCmd->Parameters->AddWithValue("@ProfilePicture", pictureData);
-			}
-			else {
-				sqlCmd->Parameters->AddWithValue("@ProfilePicture", DBNull::Value);
-			}
-
-			sqlCmd->ExecuteNonQuery();
-
-			int userID = Convert::ToInt32(sqlCmd->LastInsertedId);
-
-			// Insert role-specific data
-			if (userRole == "Student") {
-				sqlCmd->CommandText = "INSERT INTO Students (UserID, Major, EnrollmentDate, Status, IndexNumber) " +
-					"VALUES (@UserID, @Major, CURRENT_DATE, @Status, @IndexNumber)";
-				sqlCmd->Parameters->Clear();
-				sqlCmd->Parameters->AddWithValue("@UserID", userID);
+				sqlCmd->Parameters->AddWithValue("@IndexNumber", editingIndexNumber);
+				sqlCmd->Parameters->AddWithValue("@FirstName", firstName);
+				sqlCmd->Parameters->AddWithValue("@LastName", lastName);
+				sqlCmd->Parameters->AddWithValue("@Email", email);
+				sqlCmd->Parameters->AddWithValue("@PasswordHash", password); // Password hashing should be applied
+				sqlCmd->Parameters->AddWithValue("@DateOfBirth", dob);
 				sqlCmd->Parameters->AddWithValue("@Major", major);
 				sqlCmd->Parameters->AddWithValue("@Status", studentStatus);
-				sqlCmd->Parameters->AddWithValue("@IndexNumber", indexNumber);
-			}
-			else if (userRole == "Faculty") {
-				sqlCmd->CommandText = "INSERT INTO Faculty (UserID, DateOfAppointment, Department, Status) " +
-					"VALUES (@UserID, @DateOfAppointment, @Department, @Status)";
-				sqlCmd->Parameters->Clear();
-				sqlCmd->Parameters->AddWithValue("@UserID", userID);
-				sqlCmd->Parameters->AddWithValue("@DateOfAppointment", appointmentDate);
-				sqlCmd->Parameters->AddWithValue("@Department", department);
-				sqlCmd->Parameters->AddWithValue("@Status", facultyStatus);
-			}
-			else if (userRole == "Admin") {
-				sqlCmd->CommandText = "INSERT INTO Administrators (UserID, AccessLevel) " +
-					"VALUES (@UserID, @AccessLevel)";
-				sqlCmd->Parameters->Clear();
-				sqlCmd->Parameters->AddWithValue("@UserID", userID);
-				sqlCmd->Parameters->AddWithValue("@AccessLevel", adminStatus);
-			}
 
-			sqlCmd->ExecuteNonQuery();
+				// Convert the image to a byte array if present
+				if (pictureBox1->Image != nullptr) {
+					MemoryStream^ ms = gcnew MemoryStream();
+					pictureBox1->Image->Save(ms, pictureBox1->Image->RawFormat);
+					pictureData = ms->ToArray();
+				}
+				if (pictureData != nullptr) {
+					sqlCmd->Parameters->AddWithValue("@ProfilePicture", pictureData);
+				}
+				else {
+					sqlCmd->Parameters->AddWithValue("@ProfilePicture", DBNull::Value);
+				}
 
-			MessageBox::Show("User added successfully!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
-			this->Close();
+				sqlCmd->ExecuteNonQuery();
+				MessageBox::Show("Student information updated successfully!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				this->Close();
+
+
+			
+				}
+				else if (userRole == "Faculty") {
+					// Update existing faculty record
+					sqlCmd->CommandText = "UPDATE Users INNER JOIN Faculty ON Users.UserID = Faculty.UserID " +
+						"SET Users.FirstName = @FirstName, Users.LastName = @LastName, Users.Email = @Email, " +
+						"Users.PasswordHash = @PasswordHash, Users.ProfilePicture = @ProfilePicture, " +
+						"Faculty.DateOfAppointment = @DateOfAppointment, Faculty.Department = @Department, Faculty.Status = @Status " +
+						"WHERE Users.Email = @Email";
+					sqlCmd->Parameters->Clear();
+					sqlCmd->Parameters->AddWithValue("@Email", email);
+					sqlCmd->Parameters->AddWithValue("@FirstName", firstName);
+					sqlCmd->Parameters->AddWithValue("@LastName", lastName);
+					sqlCmd->Parameters->AddWithValue("@PasswordHash", password); // Password hashing should be applied
+					sqlCmd->Parameters->AddWithValue("@DateOfAppointment", appointmentDate);
+					sqlCmd->Parameters->AddWithValue("@Department", department);
+					sqlCmd->Parameters->AddWithValue("@Status", facultyStatus);
+
+					// Convert the image to a byte array if present
+					if (pictureBox1->Image != nullptr) {
+						MemoryStream^ ms = gcnew MemoryStream();
+						pictureBox1->Image->Save(ms, pictureBox1->Image->RawFormat);
+						pictureData = ms->ToArray();
+					}
+					if (pictureData != nullptr) {
+						sqlCmd->Parameters->AddWithValue("@ProfilePicture", pictureData);
+					}
+					else {
+						sqlCmd->Parameters->AddWithValue("@ProfilePicture", DBNull::Value);
+					}
+
+					sqlCmd->ExecuteNonQuery();
+					MessageBox::Show("Faculty information updated successfully!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				}
+			}
+			else {
+				// Ensure uniqueness of IndexNumber
+				Random^ rand = gcnew Random();
+				int indexNumber = 0;
+				bool unique = false;
+
+				while (!unique) {
+					indexNumber = rand->Next(100000, 999999); // Generate a random 6-digit index number
+					sqlCmd->CommandText = "SELECT COUNT(*) FROM Students WHERE IndexNumber = @IndexNumber";
+					sqlCmd->Parameters->Clear();
+					sqlCmd->Parameters->AddWithValue("@IndexNumber", indexNumber);
+
+					int count = Convert::ToInt32(sqlCmd->ExecuteScalar());
+					if (count == 0) {
+						unique = true; // IndexNumber is unique
+					}
+				}
+
+				// Convert the profile picture to a byte array (if provided)
+				if (pictureBox1->Image != nullptr) {
+					MemoryStream^ ms = gcnew MemoryStream();
+					pictureBox1->Image->Save(ms, pictureBox1->Image->RawFormat);
+					pictureData = ms->ToArray();
+				}
+
+				// Insert general user data into the Users table
+				sqlCmd->CommandText = "INSERT INTO Users (FirstName, LastName, Email, PasswordHash, DateOfBirth, Role, ProfilePicture) " +
+					"VALUES (@FirstName, @LastName, @Email, @PasswordHash, @DateOfBirth, @Role, @ProfilePicture)";
+				sqlCmd->Parameters->Clear();
+				sqlCmd->Parameters->AddWithValue("@FirstName", firstName);
+				sqlCmd->Parameters->AddWithValue("@LastName", lastName);
+				sqlCmd->Parameters->AddWithValue("@Email", email);
+				sqlCmd->Parameters->AddWithValue("@PasswordHash", password); // Hash the password if necessary
+				sqlCmd->Parameters->AddWithValue("@DateOfBirth", dob);
+				sqlCmd->Parameters->AddWithValue("@Role", userRole);
+				if (pictureData != nullptr) {
+					sqlCmd->Parameters->AddWithValue("@ProfilePicture", pictureData);
+				}
+				else {
+					sqlCmd->Parameters->AddWithValue("@ProfilePicture", DBNull::Value);
+				}
+
+				sqlCmd->ExecuteNonQuery();
+
+				// Retrieve the UserID of the newly inserted user
+				int userID = Convert::ToInt32(sqlCmd->LastInsertedId);
+
+				// Insert role-specific data
+				if (userRole == "Student") {
+					sqlCmd->CommandText = "INSERT INTO Students (UserID, Major, EnrollmentDate, Status, IndexNumber) " +
+						"VALUES (@UserID, @Major, CURRENT_DATE, @Status, @IndexNumber)";
+					sqlCmd->Parameters->Clear();
+					sqlCmd->Parameters->AddWithValue("@UserID", userID);
+					sqlCmd->Parameters->AddWithValue("@Major", major);
+					sqlCmd->Parameters->AddWithValue("@Status", studentStatus);
+					sqlCmd->Parameters->AddWithValue("@IndexNumber", indexNumber);
+				}
+				else if (userRole == "Faculty") {
+					sqlCmd->CommandText = "INSERT INTO Faculty (UserID, DateOfAppointment, Department, Status) " +
+						"VALUES (@UserID, @DateOfAppointment, @Department, @Status)";
+					sqlCmd->Parameters->Clear();
+					sqlCmd->Parameters->AddWithValue("@UserID", userID);
+					sqlCmd->Parameters->AddWithValue("@DateOfAppointment", appointmentDate);
+					sqlCmd->Parameters->AddWithValue("@Department", department);
+					sqlCmd->Parameters->AddWithValue("@Status", facultyStatus);
+				}
+				else if (userRole == "Admin") {
+					sqlCmd->CommandText = "INSERT INTO Administrators (UserID, AccessLevel) " +
+						"VALUES (@UserID, @AccessLevel)";
+					sqlCmd->Parameters->Clear();
+					sqlCmd->Parameters->AddWithValue("@UserID", userID);
+					sqlCmd->Parameters->AddWithValue("@AccessLevel", adminStatus);
+				}
+
+				sqlCmd->ExecuteNonQuery();
+
+				MessageBox::Show("User added successfully!", "Success", MessageBoxButtons::OK, MessageBoxIcon::Information);
+				this->Close();
+			}
 		}
 		catch (Exception^ ex) {
 			MessageBox::Show("Error: " + ex->Message, "Database Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
@@ -564,8 +733,11 @@ namespace FinalProject {
 				sqlConn->Close();
 			}
 		}
-	}
 
+
+
+
+	}
 
 
 private: System::Void comboBox1_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
@@ -606,6 +778,10 @@ private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e
 	}
 }
 
+private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
+	// Close the current form
+	this->Close();
+}
 };
 }
 

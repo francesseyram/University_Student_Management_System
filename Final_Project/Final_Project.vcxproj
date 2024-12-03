@@ -118,26 +118,35 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="addUser.cpp" />
     <ClCompile Include="addUsr.cpp" />
+    <ClCompile Include="Add_Course.cpp" />
+    <ClCompile Include="EnrollCourse.cpp" />
+    <ClCompile Include="facultyCourse.cpp" />
     <ClCompile Include="Login_Form.cpp" />
     <ClCompile Include="mdiForm.cpp" />
     <ClCompile Include="DBConnection.cpp" />
     <ClCompile Include="UserAuth.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="addUser.h">
-      <FileType>CppForm</FileType>
-    </ClInclude>
     <ClInclude Include="addUsr.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Add_Course.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="DBConnection.h" />
+    <ClInclude Include="EnrollCourse.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="facultyCourse.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="mdiForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -147,11 +156,17 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="addUser.resx">
-      <DependentUpon>addUser.h</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="addUsr.resx">
       <DependentUpon>addUsr.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Add_Course.resx">
+      <DependentUpon>Add_Course.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EnrollCourse.resx">
+      <DependentUpon>EnrollCourse.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="facultyCourse.resx">
+      <DependentUpon>facultyCourse.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login_Form.resx">
       <DependentUpon>Login_Form.h</DependentUpon>

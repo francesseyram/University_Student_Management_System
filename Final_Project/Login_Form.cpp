@@ -27,6 +27,7 @@ void FinalProject::Login_Form::ValidateLogin(String^ email, String^ password) {
         MessageBox::Show("Error: " + ex->Message, "Database Error");
     }
 }
+[STAThread]
 int main(array<System::String^>^ args) {
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);
